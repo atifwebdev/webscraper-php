@@ -1,0 +1,17 @@
+{
+    "name": "atif/webscraper-php",
+    "autoload": {
+        "psr-4": {
+            "Atif\\WebscraperPhp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Muhammad Atif",
+            "email": ""
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.8"
+    }
+}
