@@ -14,6 +14,10 @@
     "require": {
         "fabpot/goutte": "^4.0",
         "masterminds/html5": "^2.9",
-        "symfony/browser-kit": "^6.4"
+        "symfony/browser-kit": "^6.4",
+        "voku/simple_html_dom": "^4.8"
+    },
+    "require-dev": {
+        "symfony/panther": "^2.1"
     }
 }

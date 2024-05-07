@@ -1,5 +1,7 @@
 <?php
 # scraping books to scrape: https://books.toscrape.com/
+# This is simple scrapper
+
 require 'vendor/autoload.php';
 $client = new \Goutte\Client();
 
