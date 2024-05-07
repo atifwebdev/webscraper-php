@@ -1,27 +1,28 @@
 <?php
-# scraping books to scrape: https://ocsheriff.gov/news/
-# Scrapper with pagination
-# Scrapping data saved in CSV format
+# scraping books to scrape: https://books.toscrape.com/
+# This is simple scrapper
 
 require 'vendor/autoload.php';
 $client = new \Goutte\Client();
 
-$postCount = 0;
-while (true) {
-    $url = 'https://ocsheriff.gov/news?page=' . $postCount;
+$url = 'https://books.toscrape.com/';
+
+while (true)
+{
     $crawler = $client->request('GET', $url);
 
-    $file = fopen("books.csv", "a"); //print data in CSV file format
     $crawler
-        ->filter('.results div.views-row a.card-bordered-link div.card-bordered div.card-bordered__content h2 span')
-        ->each(function ($node) use ($file) {
+        ->filter('.row li article h3 a')
+        ->each(function ($node) use ($client) {
             $name = $node->text();
-            // $scraped_data[] = [$node->text()];
             echo "{$name} \n";
-            fputcsv($file, [$name]);
         });
-        fclose($file);
-    if ($postCount == 3) break; //put number of pages here to scrape
-    $postCount++;
-    echo "{$postCount} \n";
+
+    // Try to find the "Next" link
+    $next = $crawler->filter('li.next a');
+
+    // Stop, if there is no more "Next" link
+    if ($next->count() == 0) break;
+
+    $url = $next->link()->getUri();
 }
